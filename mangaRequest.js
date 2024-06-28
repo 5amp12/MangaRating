@@ -11,19 +11,15 @@
 
 console.log("hello")
 
-// const baseUrl = "'https://api.mangadex.org/manga";
-// const title = 'Kanojyo to Himitsu to Koimoyou';
-// fetch(baseUrl, {
-//     method: 'GET',
-//     params: {
-//         title: title
-//     }
     
-// });  
+  
 const baseUrl = "https://api.mangadex.org/manga";
-const title = 'Kanojyo to Himitsu to Koimoyou';
-const url = `${baseUrl}?title=${encodeURIComponent(title)}`;
-fetch(baseUrl, { 
+// const title = 'Kanojyo to Himitsu to Koimoyou';
+const params = new URLSearchParams({
+    title: 'Attack On Titan'
+}).toString();
+const url = `${baseUrl}?${params}`;
+fetch(url, { 
     method: 'GET'
 })
 .then(response => {
@@ -33,6 +29,7 @@ fetch(baseUrl, {
     return response.json();
 })
 .then(data => {
+    console.log(url);
     console.log(data);
 })
 
