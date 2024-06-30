@@ -1,0 +1,19 @@
+/* SEARCH SECTION */
+
+.searchSection{
+    height: 120px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    background-color: rgb(27, 27, 27);
+}
+#searchInput{
+    padding: 0;
+    border: none;
+    width: 600px;
+    background: none;
+    height: 50px;
+    color: white;
+    font-size: x-large;
+    border-bottom: 2px solid purple;
+}
