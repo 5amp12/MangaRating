@@ -15,5 +15,5 @@
     height: 50px;
     color: white;
     font-size: x-large;
-    border-bottom: 2px solid purple;
+    border-bottom: 2px solid purple;      /* the underline section of the input */
 }
