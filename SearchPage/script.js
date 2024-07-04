@@ -22,18 +22,43 @@ $(document).ready(function(){
                 console.log(url);
                 console.log(data);
 
-                // if (data.results && data.results.length > 0) {
-                    const firstManga = data.data[0];
-                    console.log(firstManga);
-                    // const firstMangaDescription = data.data[0].attributes.description.en; // Adjust 'en' for other languages if needed
-                    // console.log("First Manga Name:", firstMangaDescription);
-                    const firstMangaTitle = data.data[0].attributes.title.en;
-                    console.log(firstMangaTitle);
-                // } else {
-                //     console.log("No manga found.");
-                // }
+                const firstManga = data.data[0];
+                console.log(firstManga);
+    
+                const firstMangaTitle = data.data[0].attributes.title.en;
+                console.log(firstMangaTitle);
+
+                const mangaCoverArt = data.data[0].relationships[2].id;
+                console.log(mangaCoverArt);
             }) 
         } 
+
+
+        //Trying to get the cover file, so we can have a cover picture.
+        const coverId = "2b888ee6-eb25-4f48-86b0-f4fe898ab234"; // Example cover ID
+
+fetch(`https://api.mangadex.org/cover/${coverId}`)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Failed to fetch cover ${coverId}: ${response.statusText}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log("Cover Data:", data);
+        const coverFileName = data.data.attributes.fileName;
+
+        // Construct URL for the cover image
+        const baseUrl = "https://uploads.mangadex.org/covers"; // Base URL for MangaDex covers
+        const coverUrl = `${baseUrl}/${coverFileName}`;
+
+        console.log("Cover URL:", coverUrl);
+
+        // Now you can use 'coverUrl' to display or process the cover image
+    })
+    .catch(error => {
+        console.error("Error fetching cover data:", error);
+    }); 
     })
     
 })

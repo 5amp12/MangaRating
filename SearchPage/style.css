@@ -17,3 +17,23 @@
     font-size: x-large;
     border-bottom: 2px solid purple;      /* the underline section of the input */
 }
+.result-Section{
+    background-color: darkgray;
+    /* width: 100%; */
+    height: 400px;
+    padding: 5px 300px 5px 300px;
+    /* display: flex; */
+    /* justify-content: space-between; */
+}
+.inner-result-section{
+    display: flex;
+    justify-content: space-between;
+}
+.result1{
+    background-color: purple;
+    width: 20%;
+    height: 320px;
+
+    /* padding: 5px;    */
+
+}
