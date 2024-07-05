@@ -1,4 +1,3 @@
- 
 $(document).ready(function(){
     $('#searchInput').on("keyup", function(event){
         var searchValue = $('#searchInput').val();       //the search value
@@ -14,7 +13,7 @@ $(document).ready(function(){
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Network response was not ok: ${response.statusText}`);
+                    throw new Error(`Network response was not ok: ${response.statusText}`); 
                 }
                 return response.json();
             })
@@ -25,40 +24,37 @@ $(document).ready(function(){
                 const firstManga = data.data[0];
                 console.log(firstManga);
     
-                const firstMangaTitle = data.data[0].attributes.title.en;
-                console.log(firstMangaTitle);
+                const mangaTitle = data.data[0].attributes.title.en;
+                console.log(mangaTitle);
 
-                const mangaCoverArt = data.data[0].relationships[2].id;
-                console.log(mangaCoverArt);
+                const coverIdUrl = data.data[0].id;
+                console.log("Cover ID: ", coverIdUrl);
+
+                const coverIdForFileName = data.data[0].relationships[2].id
+                console.log("Cover ID needed for getting cover data: ", coverIdForFileName);
+
+                //GETTING THE COVER ART
+                fetch(`https://api.mangadex.org/cover/${coverIdForFileName}`, {
+                    method: 'GET'
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error(`Failed to fetch cover ${coverId}: ${response.statusText}`);
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    console.log("Cover Data:", data);
+                    const coverFileName = data.data.attributes.fileName;
+                    console.log("Cover fileName: ", coverFileName);
+                    const baseUrl = "https://uploads.mangadex.org/covers"; // Base URL for MangaDex covers
+                    const fullCoverUrl = `${baseUrl}/${coverIdUrl}/${coverFileName}.256.jpg`;
+                    console.log("The cover URL: ", fullCoverUrl);
+                })
+                .catch(error => {
+                    console.error("Error fetching cover data:", error);
+                })    
             }) 
-        } 
-
-
-        //Trying to get the cover file, so we can have a cover picture.
-        const coverId = "2b888ee6-eb25-4f48-86b0-f4fe898ab234"; // Example cover ID
-
-fetch(`https://api.mangadex.org/cover/${coverId}`)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Failed to fetch cover ${coverId}: ${response.statusText}`);
         }
-        return response.json();
     })
-    .then(data => {
-        console.log("Cover Data:", data);
-        const coverFileName = data.data.attributes.fileName;
-
-        // Construct URL for the cover image
-        const baseUrl = "https://uploads.mangadex.org/covers"; // Base URL for MangaDex covers
-        const coverUrl = `${baseUrl}/${coverFileName}`;
-
-        console.log("Cover URL:", coverUrl);
-
-        // Now you can use 'coverUrl' to display or process the cover image
-    })
-    .catch(error => {
-        console.error("Error fetching cover data:", error);
-    }); 
-    })
-    
 })
