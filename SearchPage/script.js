@@ -27,7 +27,9 @@ $(document).ready(function(){
                     const firstManga = data.data[0];
                     console.log(firstManga);
 
+                    tagsSection(data);
                     titleSection(data);        //getting the titles for each object
+                    descriptionSection(data)
                     // console.log(mangaTitle);
 
                     const coverIdUrl = data.data[0].id;
@@ -94,23 +96,45 @@ $(document).ready(function(){
             }
         }
 
-        function titleSection(data){
+        function tagsSection(data){
+            const container = $('.tags-container');
+                container.empty();
+            const className = 'tags';
             for (let i=0; i<3; i++){
-                let mangaTitle = data.data[i].attributes.title.en;
+                let tagsName = data.data[0].attributes.tags[i].attributes.name.en;
+
+                const $p = $('<p></p>');
+                $p.addClass(className);
+                $p.text(tagsName);
+                container.append($p);
                 
-                if (i==0){
-                    console.log("working 1");
-                    $('#title-one').text(mangaTitle);
+            }
+        }
+
+        function titleSection(data){
+                const mangaTitle = data.data[0].attributes.title.en;
+                
+                console.log("working 1");
+                $('#title-one').text(mangaTitle);
+                
+        }
+
+        function descriptionSection(data){
+            const description = data.data[0].attributes.description.en;
+            console.log(description);
+            let shortenedDescription = "";
+            for (let i=0; i<description.length; i++){
+                if(description.charAt(i) == '-' && description.charAt(i+1) == '-'){
+                    break;
                 }
-                else if (i==1){
-                    console.log("working 2");
-                    $('#title-two').text(mangaTitle);
-                }
-                else if (i==2){
-                    console.log("working 3");
-                    $('#title-three').text(mangaTitle);
+                else{
+                    shortenedDescription += description.charAt(i) + "";
+                    if(i == 500){
+                        break;
+                    }
                 }
             }
+            $('#description-one').text(shortenedDescription);
         }
     })
 })
