@@ -31,6 +31,7 @@
     height: 100%;
 }
 .result{
+    display: none;
     display: flex;
     flex-direction: row;
     background-color: black;
@@ -40,17 +41,17 @@
     /* margin: 10px; */
 }
 .image-container{
-    background-color: red;
+    visibility: hidden;  
+    background-color: rgb(125, 124, 124);
     width: 200px;   
-    /* overflow: hidden; */
 }
 .image-container img{
     width: 100%;   
     height: 100%; 
-    /* object-fit: contain; */
     display: block;
 }
 .information-container{
+    visibility: hidden; 
     width: 70%;
     background-color: purple;
 }
