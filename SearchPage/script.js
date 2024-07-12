@@ -45,6 +45,8 @@ $(document).ready(function(){
 
                         if (checkingSearchVal == checkingResultValues){
                             console.log("hitting"); 
+
+                            getMangaDetails(data.data[i]);
                             tagsSection(data.data[i]);                     //the data.data[i] is getting that specific result, so the data can be used in the other functions
                             titleSection(data.data[i], searchValue);        //getting the titles for each object
                             descriptionSection(data.data[i])
@@ -60,6 +62,7 @@ $(document).ready(function(){
                     console.log(found);
                     if (found != true){ 
                         console.log("hitting"); 
+                        getMangaDetails(data.data[0]);
                         tagsSection(data.data[0]);
                         titleSection(data.data[0], searchValue);        //getting the titles for each object
                         descriptionSection(data.data[0])
@@ -160,7 +163,7 @@ $(document).ready(function(){
             }
 
             const container = $('.description-container');
-            container.empty();
+            container.empty();  
 
             const $p = $('<p></p>');
             $p.text(shortenedDescription);
@@ -170,9 +173,18 @@ $(document).ready(function(){
             // $('#description-one').text(shortenedDescription);
         }
         
-        $('#result-id').on("click", function(){
-            alert("hello");
-        })
+        function getMangaDetails(data){
+
+            $('#result-id').on("click", function(){
+                const Getid = data.id;
+                window.location.href = `../MangaDetails/index.html?id=${Getid}`;
+
+            })
+
+            
+        }
+        
+        
     })
     
     
