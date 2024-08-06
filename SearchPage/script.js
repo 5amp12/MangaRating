@@ -30,6 +30,8 @@ $(document).ready(function(){
                     const firstManga = data.data[0];
                     console.log(firstManga);
 
+                    //***THIS SECTION IS FOCUSSING ON THE ERROR MESSAGE, IF NO RESULT */
+                    
 
                     //****THIS SECTION IS MAKING SURE THE TOP RESULT IS WHAT THE USER SEARCHED
                     let checkingSearchVal = searchValue.replaceAll(/[!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~]/g, '');
@@ -52,6 +54,7 @@ $(document).ready(function(){
                             descriptionSection(data.data[i])
                         
                             const coverIdUrl = data.data[i].id;
+                            console.log("COVER ID URL CHECK HERE", coverIdUrl);
                             coverSection(data.data[i], coverIdUrl, 0, 0);
                             found = true;
                             break;
@@ -75,13 +78,13 @@ $(document).ready(function(){
             }
         }
 
-        function coverSection(data, coverIdUrl, counter, mangaNumber){
+        function coverSection(data, coverIdUrl, counter){
             console.log(coverIdUrl); 
             for (let x=counter; x<5; x++){
                 if ((data.relationships[x].type) = "cover_art"){
                     callingCount = x;
                     break;
-                }
+                }   
             }
             coverIdForFileName = data.relationships[counter].id;
             //console.log("Cover ID needed for getting cover data: ", coverIdForFileName);
@@ -92,7 +95,7 @@ $(document).ready(function(){
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error(`Failed to fetch cover ${coverId}: ${response.statusText}`);
+                    throw new Error(`Failed to fetch cover ${coverIdForFileName}: ${response.statusText}`);
                 }
                 return response.json();
             })

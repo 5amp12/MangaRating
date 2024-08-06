@@ -1,11 +1,15 @@
 $(document).ready(function(){
     let counter = 0
+    let id = "one";
     $('#addButton').click(function(){
 
         counter++;
 
         const resultContainer = $('<div>')
-        .addClass('result-container');
+        .addClass('result-container')
+
+        const resultContainer1 = $('<div>')
+        .addClass('result-container')
 
         const resultDiv = $('<div>')
         .addClass('result');
@@ -32,43 +36,14 @@ $(document).ready(function(){
         resultDiv.append(imageContainer);
         resultDiv.append(informationContainer);
 
-        $('.result-container').append(resultDiv);
+        $('.result-container').last().append(resultDiv);
 
         if(counter == 4){
             $('.result-Section').append(resultContainer);
+            counter = 0;
         }
 
-
-        // const resultContainer = $('.result-container');
-
-        // const resultDiv = $('.result');
-
-        // const imageContainer = $('.image-container');
-
-        // const img = $('<img>')
-        //             // .attr('id', 'image-one')
-        //             .attr('src', "")
-                    
-        // imageContainer.append(img);
-
-        // const informationContainer = $('.information-container');    
-
-        // const titleContainer = $('.title-container');
-
-        // const titleParagraph = $('.object-title')
-        //             // .attr('id', 'title-one')
-        //             .text("title" + counter);
-
-        // titleContainer.append(titleParagraph);
-
-        // informationContainer.append(titleContainer);
-
-        // resultDiv.append(imageContainer);
-        // resultDiv.append(informationContainer);
-
-        // resultContainer.append(resultDiv);
-
-        // $('#resultSection').append(resultContainer);
+        
 
     })
 })

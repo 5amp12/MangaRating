@@ -34,7 +34,7 @@
     display: none;
     display: flex;
     flex-direction: row;
-    background-color: black;
+    /* background-color: black; */
     width: 656px;    
     height: 100%;
     position: relative;
