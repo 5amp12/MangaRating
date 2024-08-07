@@ -1,145 +1,6 @@
-
-// var title = ""; 
-// $(document).ready(async function(){
-//     let overallCounter = -1;
-//     await mangaRecommendation();
-
-
-
-//     async function mangaRecommendation(){
-//         let counter = -1;
-//         for(let i=0; i<8; i++){
-//             counter++;
-//             overallCounter++;
-//             // console.log(overallCounter);
-
-//             const resultContainer = $('<div>')
-//             .addClass('result-container')
-
-//             const resultDiv = $('<div>')
-//             .addClass('result')
-//             .addClass('result-' + overallCounter);
-
-//             const imageContainer = $('<div>')
-//             .addClass('image-container')
-//             .addClass('image-container-' + overallCounter);
-
-//             const img = $('<img>')
-//             // .addClass('image-one');
-//                 .addClass('image-' + overallCounter);
-//                 await mainMangaSection(overallCounter, "cover");
-
-//             imageContainer.append(img);
-
-//             const informationContainer = $('<div>')
-//                 .addClass('information-container');
-//             const titleContainer = $('<div>')
-//                 .addClass('title-container')
-//                 .addClass('title-container-' + overallCounter);
-//             const titleParagraph = $('<p>')
-//                 .addClass('object-title')
-//                 // .text("title" + counter);
-//                 .text(await mainMangaSection(overallCounter, "title"))   ;
-
-//             titleContainer.append(titleParagraph);
-//             informationContainer.append(titleContainer);
-
-//             resultDiv.append(imageContainer);
-//             resultDiv.append(informationContainer);
-
-//             $('.result-container').last().append(resultDiv);
-
-//             if(counter == 3){
-//                 $('.result-Section').append(resultContainer);
-//                 counter = -1;
-//             }
-            
-//         }
-//     }
-    
-//     async function mainMangaSection(overallCounter, dataNeeded){
-//         const baseUrl = "https://api.mangadex.org/manga";
-//         const params = new URLSearchParams({
-//             "limit": 4,
-//             "order[rating]": "desc"
-//         }).toString();
-//         const url = `${baseUrl}?${params}`;
-//         const response = await fetch(url);
-//         if (!response.ok) {
-//             throw new Error(`Network response was not ok: ${response.statusText}`); 
-//         }
-//         const data = await response.json();
-//         if (dataNeeded === "title"){
-//             titleSection(data.data[overallCounter], overallCounter);
-//         }
-//         if (dataNeeded === "cover"){
-//             let coverIdUrl = data.data[overallCounter].id;
-//             // console.log("COVER ID URL HERE: ", coverIdUrl);
-//             // console.log(data.data[overallCounter]);
-//             coverSection(data.data[overallCounter], coverIdUrl, 0, overallCounter);
-//             // console.log("COVER SECTION GETTING HIT");
-//         }
-    
-//     }
-
-//     async function coverSection(data, coverIdUrl, coverCounter, overallCounter){
-        
-//         console.log("COVER COUNTER " + coverCounter  + "  ,"); 
-//         console.log(data);
-//         let callingCount;
-//         for (let x=coverCounter; x<5; x++){
-//             if ((data.relationships[x].type) === "cover_art"){
-//                 callingCount = x;
-//                 break;
-//             }
-//         }
-//         coverIdForFileName = data.relationships[coverCounter].id;
-//         // console.log("Cover ID needed for getting cover data: ", coverIdForFileName);
-        
-//         //GETTING THE COVER ART
-//         const response = await fetch(`https://api.mangadex.org/cover/${coverIdForFileName}`);
-//         if (!response.ok) {
-//             throw new Error(`Failed to fetch cover ${coverIdForFileName}: ${response.statusText}`);
-//         }
-//         data = await response.json();
-        
-//         // console.log("Cover Data:", data);
-//         const coverFileName = data.data.attributes.fileName;
-//         //console.log("Cover fileName: ", coverFileName);
-//         const baseUrl = "https://uploads.mangadex.org/covers"; // Base URL for MangaDex covers
-//         const fullCoverUrl = `${baseUrl}/${coverIdUrl}/${coverFileName}.512.jpg`;
-//         console.log("The cover URL: ", fullCoverUrl);
-//         $('.image-' + overallCounter).attr('src', fullCoverUrl);
-            
-            
-        
-//         // .catch(error => {
-//         //     if (coverCounter != 5){
-//         //         // console.log("calling count: ", callingCount);
-//         //         coverSection(data, coverIdUrl, (callingCount+1), overallCounter);
-//         //     }
-//         //     else{
-//         //         console.error("Error fetching cover data at :", overallCounter, error);
-//         //     } 
-//         // })    
-        
-//     }
-
-//     function titleSection(data, overallCounter){
-//         const container = $('.title-container-' + overallCounter);
-//         container.empty();
-
-//         const mangaTitle = data.attributes.title.en;
-
-//         console.log(mangaTitle);
-
-//         const $p = $('<p></p>');
-//         $p.addClass("object-title");
-//         $p.text(mangaTitle);
-//         container.append($p);
-//     }
-// });
-
+//**** THIS SECTION IS A BIT MORE MESSY, BASICALLY I DIDNT KNOW THAT NORMALLY JAVASCRIPT IS ASYNCHRONOUS */
+//***** MEANING IT DOESNT RUN THINGS IN ORDER, SO IN ORDER TO COMBAT THIS WHILST WORKING WITH MULTIPLE OBJECTS */
+//****  I HAD TO CHANGE UP THE CODE AS YOU SEE, USING 'async' and 'await' */
 
 
 $(document).ready(async function() {
@@ -148,11 +9,16 @@ $(document).ready(async function() {
 
     async function mangaRecommendation() {
         let counter = -1;
-        for (let i = 0; i < 8; i++) {
+        for (let i = 0; i < 10; i++) {
             counter++;
             overallCounter++;
 
-            let title = await mainMangaSection(overallCounter, "title")
+            
+            let title = await mainMangaSection(overallCounter, "title");
+            
+                
+            
+            // console.log(mangaid);
             // console.log(title);
             const resultContainer = $('<div>').addClass('result-container');
 
@@ -177,14 +43,39 @@ $(document).ready(async function() {
             const titleParagraph = $('<p>')
                 .addClass('object-title')
                 .text(title);
+            const ratingContainer = $('<div>')
+                .addClass('ratingContainer-' + overallCounter)
+                .addClass('ratingContainer');
+                console.log(overallCounter);
+            const starIcon = $('<img>')
+                .attr('src', '../icons/star-icon.png')
+                .addClass('star-image');
+            const ratingP = $('<p>')
+                .addClass('ratingText')
+                .addClass('ratingText-' + overallCounter);  
+            
+                // .text(rating);
 
             // Fetch cover and title data
-            await mainMangaSection(overallCounter, "cover");        
+            // let mangaid = await mainMangaSection(overallCounter, "MangaID");
+            // await ratingSection(mangaid);  
+            
+
+            await mainMangaSection(overallCounter, "cover"); 
+             
+            
             
             titleContainer.append(titleParagraph);
+            ratingContainer.append(starIcon);
+            // ratingContainer.append(ratingP);
+            // console.log("hello")
             informationContainer.append(titleContainer);
+            informationContainer.append(ratingContainer);   
             resultDiv.append(imageContainer);
             resultDiv.append(informationContainer);
+
+             
+
 
             $('.result-container').last().append(resultDiv);
 
@@ -193,12 +84,19 @@ $(document).ready(async function() {
                 counter = -1;
             }
         }
+        
+        //**This deals with the rating section */
+        for(let i=0; i<(overallCounter+1); i++){         
+            let mangaid = await mainMangaSection(i, "MangaID");
+            await ratingSection(mangaid, i);
+        }
+         
     }
 
     async function mainMangaSection(overallCounter, dataNeeded) {
         const baseUrl = "https://api.mangadex.org/manga";
         const params = new URLSearchParams({
-            "limit": 8,
+            "limit": 10,
             "order[rating]": "desc"
         }).toString();
         const url = `${baseUrl}?${params}`;
@@ -217,11 +115,15 @@ $(document).ready(async function() {
                 let coverIdUrl = data.data[overallCounter].id;
                 coverSection(data.data[overallCounter], coverIdUrl, 0, overallCounter);
             }
+            if(dataNeeded === "MangaID"){
+                // console.log(data.data[overallCounter].id);
+                return data.data[overallCounter].id;
+            }
         }
     }
 
     async function coverSection(data, coverIdUrl, coverCounter, overallCounter) {
-        console.log("COVER COUNTER " + coverCounter);
+        // console.log("COVER COUNTER " + coverCounter);
         let callingCount;
         for (let x = coverCounter; x < data.relationships.length; x++) {
             if (data.relationships[x].type === "cover_art") {
@@ -239,8 +141,29 @@ $(document).ready(async function() {
         const coverFileName = coverData.data.attributes.fileName;
         const baseUrl = "https://uploads.mangadex.org/covers";
         const fullCoverUrl = `${baseUrl}/${coverIdUrl}/${coverFileName}.512.jpg`;
-        console.log("The cover URL: ", fullCoverUrl);
+        // console.log("The cover URL: ", fullCoverUrl);
         $('.image-' + overallCounter).attr('src', fullCoverUrl);
+    }
+
+    async function ratingSection(mangaID, count){
+        // console.log(mangaID);
+        const url = `https://api.mangadex.org/statistics/manga/${mangaID}`
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`Network response was not ok: ${response.statusText}`);
+        }
+        const Ratingdata = await response.json();
+
+        const avgRating = (Ratingdata.statistics[mangaID].rating.average);  
+
+        const container = $('.ratingContainer-'+count);
+        
+        const ratingP = $('<p></p>');
+        ratingP.addClass('ratingText')
+        
+        ratingP.text(avgRating);
+        container.append(ratingP);
+        // console.log(avgRating);
     }
 });
 

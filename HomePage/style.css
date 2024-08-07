@@ -19,8 +19,8 @@
     outline: none;
 }
 .result-Section{
-    background-color: rgb(9, 9, 9);
-    height: 330px;
+    /* background-color: rgb(9, 9, 9); */
+    height: 260px;
     padding: 5px 20px 5px 20px;
     box-sizing: border-box;
     flex-wrap: wrap;
@@ -37,7 +37,7 @@
     display: flex;
     flex-direction: column;
     background-color: black;
-    width: 200px;    
+    width: 150px;    
     height: 100%;
     position: relative;
     padding-left: 10px;
@@ -46,7 +46,7 @@
 }
 .image-container{
     /* visibility: hidden;   */
-    height: 95%;
+    height: 85%;
     background-color: rgb(125, 124, 124);
     width: 100%;   
 }
@@ -54,23 +54,52 @@
     width: 100%;   
     height: 100%; 
     display: block;
+    /* position: absolute; */
 }
 .information-container{
+    /* position: absolute; */
     /* visibility: hidden;  */
     width: 100%;
     background-color: purple;
+}  
+.title-container{
+    width: 100%;
+    overflow: hidden; /* Hide overflow text */
+    text-overflow: ellipsis; /* Add ellipsis for overflow text */
+    white-space: nowrap; 
 }
-
 .object-title{
-    padding: 3px 5px 3px 15px;
+    /* position: absolute; */
+    padding: 3px 5px 3px 3px;
     font-family: Arial, sans-serif;
     overflow-wrap: break-word;
     margin: 4px;
-    font-size: large;
+    margin-bottom: 0;
+    font-size: small;
     color: white;
     font-weight: bold;
     /* margin-top: 4px; */
 }
+.ratingContainer{
+    display: flex;
+    /* align-items: center; */
+    /* justify-content: center; */
+    padding: 0 0 3px 6px;   
+}
+.star-image{
+    width: 16px;
+    height: 16px;
+}
+.ratingText{
+    margin: 0px;
+    color: rgb(179, 178, 178);
+    font-size: x-small;
+    font-family: Arial, sans-serif;
+    padding-left: 3px;
+    margin-top: 4px;
+    
+}
+
 
 .result-Section h1{
     color: white;
@@ -80,5 +109,4 @@
     justify-content: center;
     padding-top: 10px;
     font-size: x-large;
-
 }
