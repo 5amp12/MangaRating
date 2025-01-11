@@ -178,11 +178,11 @@ $(document).ready(function(){
         
         function getMangaDetails(data){
 
-            $('#result-id').on("click", function(){
-                const Getid = data.id;
-                window.location.href = `../MangaDetails/index.html?id=${Getid}`;
+                $('#result-id').on("click", function(){
+                    const Getid = data.id;
+                    window.location.href = `../MangaDetails/index.html?id=${Getid}`;
 
-            })
+                })
 
             
         }
